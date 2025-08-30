@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Site com Imagens Flutuantes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+    .hover-img {
+      color: #2274A5;
+      text-decoration: underline;
+      cursor: pointer;
+      position: relative;
+    }
+    .img-popup {
+      display: none;
+      position: absolute;
+      top: 1.5em;
+      left: 0;
+      z-index: 10;
+      background: #fff;
+      border: 1px solid #aaa;
+      padding: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 240px;
+      border-radius: 8px;
+    }
+    .img-popup img {
+      max-width: 220px;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bem-vindo ao meu site!</h1>
+  <p>
+    Este site mostra como <span class="hover-img" data-img="https://placekitten.com/200/200">palavras</span> podem exibir <span class="hover-img" data-img="https://placebear.com/200/200">imagens flutuantes</span> quando você passa o mouse por cima.
+  </p>
+
+  <script>
+    document.querySelectorAll('.hover-img').forEach(function(word) {
+      word.addEventListener('mouseenter', function(e) {
+        let popup = document.createElement('div');
+        popup.className = 'img-popup';
+        popup.innerHTML = '<img src="' + word.dataset.img + '" alt="Imagem flutuante">';
+        word.appendChild(popup);
+        popup.style.display = 'block';
+      });
+      word.addEventListener('mouseleave', function(e) {
+        let popup = word.querySelector('.img-popup');
+        if (popup) word.removeChild(popup);
+      });
+    });
+  </script>
+</body>
+</html>
